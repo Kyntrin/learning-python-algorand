@@ -25,7 +25,7 @@ def main():
             with open("tasks.json", "r") as f:
                 tasks = json.load(f)
         except FileNotFoundError:
-            pass
+            print('No tasks found! Save some first!')
 
 
     load_tasks()
@@ -34,12 +34,14 @@ def main():
     def add_task(description: str) -> None:
         tasks.append(description)
         save_tasks()
-        list_task()
 
 
     def list_task() -> None:
+        print('-------')
+        print('Tasks list:')
         for index, task in enumerate(tasks):
             print(f'{index + 1}. {task}')
+        print('-------')
 
 
     def complete_task(task_number: int) -> None:
@@ -48,7 +50,6 @@ def main():
             removed = tasks.pop(index)
             print(f'Task completed: {removed}')
             save_tasks()
-            list_task()
         else:
             print('Número inválido')
 
